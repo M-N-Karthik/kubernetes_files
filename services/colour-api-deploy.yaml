@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: colour-api-deploy
+  labels:
+    app: colour-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: colour-api
+  template:
+    metadata:
+      labels:
+        app: colour-api
+    spec:
+      containers:
+      - name: colour-api-container
+        image: naruto70196/colourapi:0.0.2
+        ports:
+        - containerPort: 80

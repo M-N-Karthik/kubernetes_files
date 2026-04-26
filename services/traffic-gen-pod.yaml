@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+  labels:
+    app: traffic-generator
+spec:
+  containers:
+  - name: traffic-generator
+    image: naruto70196/trafic-generator:0.0.1
+    args:
+     - '10.99.237.168/api'
+     - '0.5'
+
