@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: empty-dir-pod
+  labels:
+    app: empty-dir
+spec:
+  containers:
+  - name: empty-dir-container
+    image: busybox:1.36.0
+    command: ["sh", "-c", "echo Hello from the emptyDir volume! > /usr/share/tmp/index.html && sleep 3600"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - name: empty-dir-volume
+      mountPath: /usr/share/tmp
+  - name: empty-dir-container-readonly
+    image: busybox:1.36.0
+    command: ["sh", "-c", "cat /tmp/index.html && sleep 3600"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - name: empty-dir-volume
+      mountPath: /tmp
+      readOnly: true
+  volumes:
+  - name: empty-dir-volume
+    emptyDir: {}
